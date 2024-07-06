@@ -1,13 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// import orderRoutes from './routes/orderRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import healthRoutes from './routes/healthRoutes.js';
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api', healthRoutes);
-// app.use('/api', orderRoutes);
+app.use('/', orderRoutes);
+app.use('/', healthRoutes);
 
 export default app;
