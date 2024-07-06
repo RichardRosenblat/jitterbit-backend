@@ -1,19 +1,33 @@
 import Order from '../models/order.model.js';
+import { validateCreateOrderValues } from '../validators/order.validator.js';
+import { mapOrderToModelData, mapOrderToResponse } from '../mappers/order.mapper.js';
 
 export default {
     createOrder: async (req, res) => {
         try {
-            const { orderId, value, creationDate, items } = req.body;
-            const newOrder = new Order({
-                orderId,
-                value,
-                creationDate: new Date(creationDate),
-                items
-            });
+            const body = req.body;
+
+            const errors = validateCreateOrderValues(body);
+
+            if (body.numeroPedido) {
+                const order = await Order.findOne({ orderId: body.numeroPedido });
+                if (order) {
+                    errors.push('numeroPedido já cadastrado');
+                }
+            }
+
+            if (errors.length) {
+                return res.status(400).json({ message: errors });
+            }
+
+            const newOrder = new Order(
+                mapOrderToModelData(body)
+            );
+
             await newOrder.save();
-            res.status(201).json(newOrder);
+            res.status(201).json(mapOrderToResponse(newOrder));
         } catch (err) {
-            res.status(400).json({ message: err.message });
+            res.status(500).json({ message: err.message });
         }
     },
 
