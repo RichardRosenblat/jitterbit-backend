@@ -38,7 +38,7 @@ export default {
             if (!order) {
                 return res.status(404).json({ message: 'Order not found.' });
             }
-            res.json(order);
+            res.json(mapOrderToResponse(order));
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
@@ -47,7 +47,7 @@ export default {
     listOrders: async (_req, res) => {
         try {
             const orders = await Order.find();
-            res.json(orders);
+            res.json(orders.map(order => mapOrderToResponse(order)));
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
@@ -78,7 +78,7 @@ export default {
             if (!deletedOrder) {
                 return res.status(404).json({ message: 'Order not found.' });
             }
-            res.json({ message: 'Order deleted successfully.' });
+            res.status(200).json(mapOrderToResponse(deletedOrder));
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
