@@ -1,4 +1,4 @@
-import Order from '../models/orderModel.js';
+import Order from '../models/order.model.js';
 
 export default {
     createOrder: async (req, res) => {
@@ -30,7 +30,7 @@ export default {
         }
     },
 
-    listOrders: async (req, res) => {
+    listOrders: async (_req, res) => {
         try {
             const orders = await Order.find();
             res.json(orders);
