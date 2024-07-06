@@ -1,14 +1,16 @@
 export const mapOrderToModelData = ({ numeroPedido, valorTotal, dataCriacao, items }) => {
-    return {
-        orderId: numeroPedido,
-        value: valorTotal,
-        creationDate: new Date(dataCriacao),
-        items: items.map(item => ({
-            productId: +item.idItem,
-            quantity: item.quantidadeItem,
-            price: item.valorItem
-        }))
-    };
+    const mappedOrder =  {};
+
+    numeroPedido && (mappedOrder.orderId = numeroPedido)
+    valorTotal && (mappedOrder.value = valorTotal)
+    dataCriacao && (mappedOrder.creationDate = new Date(dataCriacao))
+    items && (mappedOrder.items = items.map(item => ({
+        productId: +item.idItem,
+        quantity: item.quantidadeItem,
+        price: item.valorItem
+    })))
+
+    return mappedOrder;
 }
 
 export const mapOrderToResponse = (order) => {

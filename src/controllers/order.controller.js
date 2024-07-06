@@ -1,11 +1,11 @@
 import Order from '../models/order.model.js';
-import { validateCreateOrderValues } from '../validators/order.validator.js';
+import { validateCreateOrderValues, validateUpdateOrderValues } from '../validators/order.validator.js';
 import { mapOrderToModelData, mapOrderToResponse } from '../mappers/order.mapper.js';
 
 export default {
     createOrder: async (req, res) => {
         try {
-            const body = req.body;
+            const { body } = req;
 
             const errors = validateCreateOrderValues(body);
 
@@ -36,7 +36,7 @@ export default {
             const orderId = req.params.orderId;
             const order = await Order.findOne({ orderId });
             if (!order) {
-                return res.status(404).json({ message: 'Order not found.' });
+                return res.status(404).json({ message: 'Pedido não enontrado' });
             }
             res.json(mapOrderToResponse(order));
         } catch (err) {
@@ -55,15 +55,34 @@ export default {
 
     updateOrder: async (req, res) => {
         try {
-            const orderId = req.params.orderId;
-            const { value, creationDate, items } = req.body;
+            const { orderId } = req.params;
+            const { body } = req;
+
+            const errors = validateUpdateOrderValues(body);
+
+            if (orderId) {
+                const orderToChange = await Order.findOne({ orderId });
+                if (!orderToChange) {
+                    errors.push('Pedido não encontrado');
+                } else if (orderId !== body.numeroPedido) {
+                    const orderWithNewId = await Order.findOne({ orderId: body.numeroPedido });
+                    if (orderWithNewId) {
+                        errors.push('novo numeroPedido já está cadastrado');
+                    }
+                }
+            }
+
+            if (errors.length) {
+                return res.status(400).json({ message: errors });
+            }
+
             const updatedOrder = await Order.findOneAndUpdate(
                 { orderId },
-                { value, creationDate, items },
-                { new: true }
+                mapOrderToModelData(body), { new: true }
             );
+
             if (!updatedOrder) {
-                return res.status(404).json({ message: 'Order not found.' });
+                return res.status(404).json({ message: 'Pedido não enontrado' });
             }
             res.json(updatedOrder);
         } catch (err) {
@@ -76,7 +95,7 @@ export default {
             const orderId = req.params.orderId;
             const deletedOrder = await Order.findOneAndDelete({ orderId });
             if (!deletedOrder) {
-                return res.status(404).json({ message: 'Order not found.' });
+                return res.status(404).json({ message: 'Pedido não enontrado' });
             }
             res.status(200).json(mapOrderToResponse(deletedOrder));
         } catch (err) {
