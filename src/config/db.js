@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// Função para conectar ao banco de dados MongoDB
 export default async function connectDB() {
     mongoose.connection.on('connected', () => console.log('Connected to MongoDB'));
     mongoose.connection.on('open', () => console.log('Connection opened'));

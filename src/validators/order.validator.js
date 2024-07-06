@@ -1,3 +1,4 @@
+// Valida os valores de entrada para as operação de criação de pedidos.
 export const validateCreateOrderValues = ({
     numeroPedido,
     valorTotal,
@@ -64,6 +65,8 @@ export const validateCreateOrderValues = ({
     }
     return errors;
 }
+
+// Valida os valores de entrada para a operação de atualização de pedidos.
 export const validateUpdateOrderValues = (orderInfo) => {
     const errors = validateCreateOrderValues(orderInfo);
 

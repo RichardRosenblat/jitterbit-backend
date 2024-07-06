@@ -2,11 +2,13 @@ import 'dotenv/config'
 import connectDB from './config/db.js';
 import app from './app.js';
 
+// Função para parar o servidor
 const stopServer = (server) => {
     console.log('Stopping server');
     server.close();
 };
 
+// Função principal para conectar ao banco de dados e iniciar o servidor
 async function main() {
     console.log('Connecting to database...');
     await connectDB();
@@ -22,4 +24,6 @@ async function main() {
     process.on('SIGINT', () => stopServer(server));
 
 }
+
+// Chama a função principal
 main().catch(err => console.error(err));

@@ -2,6 +2,7 @@ import Order from '../models/order.model.js';
 import { validateCreateOrderValues, validateUpdateOrderValues } from '../validators/order.validator.js';
 import { mapOrderToModelData, mapOrderToResponse } from '../mappers/order.mapper.js';
 
+// Funções de controle de pedidos
 export default {
     createOrder: async (req, res) => {
         try {
@@ -36,7 +37,7 @@ export default {
             const orderId = req.params.orderId;
             const order = await Order.findOne({ orderId });
             if (!order) {
-                return res.status(404).json({ message: 'Pedido não enontrado' });
+                return res.status(404).json({ message: 'Pedido não encontrado' });
             }
             res.json(mapOrderToResponse(order));
         } catch (err) {

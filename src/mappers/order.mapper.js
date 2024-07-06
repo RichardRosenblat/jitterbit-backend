@@ -1,3 +1,4 @@
+// Transforma os dados do pedido para o modelo de dados da aplicação e vice-versa
 export const mapOrderToModelData = ({ numeroPedido, valorTotal, dataCriacao, items }) => {
     const mappedOrder =  {};
 
@@ -13,6 +14,7 @@ export const mapOrderToModelData = ({ numeroPedido, valorTotal, dataCriacao, ite
     return mappedOrder;
 }
 
+// Transforma os dados do pedido para o modelo de resposta da aplicação
 export const mapOrderToResponse = (order) => {
     return {
         orderId: order.orderId,

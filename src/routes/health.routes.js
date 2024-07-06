@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 const router = express.Router();
 
+// Rota para verificar a saúde da API e do banco de dados
 router.get('/health', (_req, res) => {
   console.log('GET /health');
 

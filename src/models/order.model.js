@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// Criação do schema de pedidos
 const OrderSchema = new mongoose.Schema({
   orderId: String,
   value: Number,
@@ -11,6 +12,7 @@ const OrderSchema = new mongoose.Schema({
   }]
 });
 
+// Criação do modelo de pedidos
 const Order = mongoose.model('Order', OrderSchema);
 
 export default Order;
