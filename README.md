@@ -4,6 +4,8 @@ Este projeto foi desenvolvido para o desafio técnico da Jitterbit.
 
 ## Tecnologias utilizadas
 
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
+
 ### Stack
 - Node.js
 - MongoDB
@@ -42,7 +44,7 @@ cp .env-example .env
 ```
 **Obs:** Preencha as variáveis de ambiente no arquivo `.env` com as informações necessárias.
 
-### Executando o projeto
+### Iniciando o projeto
 ```bash
 npm start
 ```
@@ -57,7 +59,7 @@ Acesse a aplicação através da url-base: `http://localhost:3000`
 ### Acessando a documentação da API
 Acesse a documentação da API através do link: `http://localhost:3000/api-docs`
 
-### Estrutura do projeto
+## Estrutura do projeto
 O projeto utiliza a seguinte estrutura de pastas:
 ```
 jitterbit-backend
@@ -96,3 +98,10 @@ Onde:
 - `package.json`: Arquivo que contém as informações do projeto e as dependências.
 - `package-lock.json`: Arquivo que contém as versões exatas das dependências instaladas.
 - `README.md`: Arquivo que contém a documentação do projeto.
+
+## Autor
+
+### Richard Rosenblat
+- Email: [rosenblatr\@gmail.com](mailto:rosenblatr@gmail.com)
+- Github: [https://github.com/RichardRosenblat](https://github.com/RichardRosenblat)
+- LinkedIn: [https://www.linkedin.com/in/richard-rosenblat](https://www.linkedin.com/in/richard-rosenblat/)
